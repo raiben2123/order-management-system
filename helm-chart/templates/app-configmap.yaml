@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: app-config
+    namespace: order-management
+data:
+    POSTGRES_HOST: postgres-service
+    POSTGRES_PORT: "5432"
+    KAFKA_BOOTSRAP_SERVER: kafka-service:9092
+    REDIS_HOST: redis-service
+    REDIS_PORT: "6379"

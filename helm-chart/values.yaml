@@ -1,0 +1,53 @@
+﻿# Default values for order-management-system
+
+replicaCount:
+  orderService: 2
+  inventoryService: 2
+
+image:
+  orderService:
+    repository: order-service
+    tag: latest
+    pullPolicy: Never
+  inventoryService:
+    repository: inventory-service
+    tag: latest
+    pullPolicy: Never
+
+resources:
+  orderService:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+  inventoryService:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+service:
+  type: LoadBalancer
+  orderServicePort: 8081
+  inventoryServicePort: 8082
+
+postgres:
+  enabled: true
+  database: oms_db
+  user: postgres
+
+kafka:
+  enabled: true
+  
+redis:
+  enabled: true
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50

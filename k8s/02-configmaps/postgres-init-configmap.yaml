@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+  namespace: order-management
+data:
+  init-db.sh: |
+    #!/bin/bash
+    set -e
+    
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+        SELECT 'CREATE DATABASE inventory_service_db'
+        WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'inventory_service_db')\gexec
+    EOSQL
