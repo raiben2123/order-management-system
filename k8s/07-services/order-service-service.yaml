@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: order-management
+spec:
+  selector:
+    app: order-service
+  ports:
+  - port: 8081
+    targetPort: 8081
+  type: LoadBalancer
